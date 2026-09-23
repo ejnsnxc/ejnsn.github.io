@@ -1,6 +1,5 @@
 window.addEventListener("DOMContentLoaded", domLoaded);
 
-// When the DOM has finished loading, add the event listeners.
 function domLoaded() {
    const F_input = document.getElementById("F_in");
    const C_input = document.getElementById("C_in");
