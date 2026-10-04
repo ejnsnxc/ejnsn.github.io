@@ -50,7 +50,5 @@ function e($value) {
             </tbody>
         </table>
     <?php endif; ?>
-
-    <p><a href="pizza.html">&larr; Back to the order form</a></p>
 </body>
 </html>
