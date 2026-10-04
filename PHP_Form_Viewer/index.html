@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Order Form</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <h1>Pizza Order Form</h1>
+
+    <div id="example">
+        <h3>Send with: <span id="method">GET</span></h3>
+        <div id="getOrPost">
+            <input type="radio" name="send_method" id="get" value="GET" checked>
+            <label for="get">GET</label>
+            <input type="radio" name="send_method" id="post" value="POST">
+            <label for="post">POST</label>
+        </div>
+    </div>
+
+    <h2>Build Your Pizza</h2>
+
+    <form id="orderForm" action="viewer.php" method="GET">
+
+        <fieldset>
+            <legend>Customer Info</legend>
+
+            <label for="cname">Name:</label>
+            <input type="text" name="customer_name" id="cname" placeholder="Your name"><br><br>
+
+            <label for="pickup">Pickup date:</label>
+            <input type="date" name="pickup_date" id="pickup"><br><br>
+
+            <label for="spice">Spice level (0 = mild, 10 = fiery):</label>
+            <input type="range" name="spice_level" id="spice" min="0" max="10" value="3">
+        </fieldset>
+
+        <fieldset>
+            <legend>Crust (choose one)</legend>
+
+            <input type="radio" name="crust" id="crust1" value="thin">
+            <label for="crust1">Thin</label><br>
+
+            <input type="radio" name="crust" id="crust2" value="hand-tossed">
+            <label for="crust2">Hand-tossed</label><br>
+
+            <input type="radio" name="crust" id="crust3" value="deep dish">
+            <label for="crust3">Deep dish</label><br>
+        </fieldset>
+
+        <!-- Checkbox: 3+ choices -->
+        <fieldset>
+            <legend>Add-ons (choose any)</legend>
+
+            <input type="checkbox" name="extra_cheese" id="cb1" value="yes">
+            <label for="cb1">Extra cheese</label><br>
+
+            <input type="checkbox" name="garlic_butter" id="cb2" value="yes">
+            <label for="cb2">Garlic butter crust</label><br>
+
+            <input type="checkbox" name="dipping_sauce" id="cb3" value="yes">
+            <label for="cb3">Dipping sauce</label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Size &amp; Drink</legend>
+
+            <label for="size">Size:</label>
+            <select name="size" id="size">
+                <option value="small">Small</option>
+                <option value="medium" selected>Medium</option>
+                <option value="large">Large</option>
+                <option value="xl">Extra large</option>
+            </select><br><br>
+
+            <label for="toppings">Toppings (hold Ctrl/Cmd to pick several):</label><br>
+            <select name="toppings[]" id="toppings" size="4" multiple>
+                <option value="pepperoni">Pepperoni</option>
+                <option value="mushrooms">Mushrooms</option>
+                <option value="olives">Olives</option>
+                <option value="pineapple">Pineapple</option>
+                <option value="onions">Onions</option>
+            </select>
+        </fieldset>
+
+        <input type="submit" value="Place Order">
+    </form>
+
+    <script>
+        const form = document.getElementById("orderForm");
+        const method = document.getElementById("method");
+        const radioButtons = document.querySelectorAll('input[name="send_method"]');
+
+        radioButtons.forEach(rb => {
+            rb.addEventListener("change", () => {
+                if (rb.checked) {
+                    method.textContent = rb.value;
+                    form.setAttribute("method", rb.value);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

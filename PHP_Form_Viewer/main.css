@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 70%;
+    margin: 20px auto;
+    background-color: gainsboro;
+}
+form {
+    background-color: white;
+    padding: 2em;
+}
+fieldset {
+    padding: 20px;
+    margin: 20px;
+}
+input[type=submit] {
+    font-size: 1.2em;
+    padding: 1em;
+    margin: 20px;
+}
+select {
+    width: 12em;
+}
+#example {
+    border: 3pt solid black;
+    padding: 2rem;
+    background-color: aliceblue;
+}
+
+table.results {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+}
+table.results th,
+table.results td {
+    border: 1px solid #888;
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+}
+table.results th {
+    background-color: #2c3e50;
+    color: white;
+}
+table.results tbody tr:nth-child(even) {
+    background-color: aliceblue;
+}
+table.results ul {
+    margin: 0;
+    padding-left: 1.2em;
+}
