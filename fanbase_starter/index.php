@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Load the helper functions once. __DIR__ is this file's folder, and the dot
 // joins it to '/fans.php'. Loading the functions does not call them.
 require_once __DIR__ . '/fans.php';
@@ -47,47 +48,50 @@ $message = '';
 // 5. On GET, use readFans($db) to fill $fans. The foreach loop below displays
 //    one table row per fan. A GET only reads data; it must not add or delete fans.
 
-if(isset($_SESSION['message'])){
-    $message = (string) $_SESSION(['message']);
-    unset($_SERVER['message']);
+if (isset($_SESSION['message'])) {
+    $message = (string) $_SESSION['message'];
+    unset($_SESSION['message']);
 }
-
+ 
 $isPost = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
-
-try{
+ 
+try {
     $db = openDatabase();
-
-    if($isPost){
+ 
+    if ($isPost) {
         $action = $_POST['action'] ?? '';
-
-        if($action === 'add')
+ 
+        if ($action === 'add') {
             $users = requestJson($userApiUrl);
-            $albumReponse = requestJson($albumApiUrl);
-            $fan = fanFromResponses($users, $albumReponse);
+            $albumResponse = requestJson($albumApiUrl);
+            $fan = fanFromResponses($users, $albumResponse);
             insertFan($db, $fan);
-            $message = 'Added Fan: ' . $fan['first_name'] . ' ' . $fan['last_name'] . '.';
-    } elseif ($action === 'delete'){
-        $message = deleteOldestFan($db);
-        ? 'Deleted the oldest fan.'
-        : 'There are no fans to delete.';
-    }else{
-        $message = 'Unknown action. No changes were made.'
+            $message = 'Added fan: ' . $fan['first_name'] . ' ' . $fan['last_name'] . '.';
+        } elseif ($action === 'delete') {
+            $message = deleteOldestFan($db)
+                ? 'Deleted the oldest fan.'
+                : 'There are no fans to delete.';
+        } else {
+            $message = 'Unknown action. No changes were made.';
+        }
+    } else {
+        $fans = readFans($db);
     }
-}catch (FanApiException $error) {
+} catch (FanApiException $error) {
     $message = $error->getMessage();
 } catch (Throwable $error) {
     error_log($error->getMessage());
     $message = 'A database or setup problem occurred. Check your configuration and try again.';
 }
-
-if($isPost){
+ 
+if ($isPost) {
     $_SESSION['message'] = $message;
-    header('Location: index.php', true, 303)
+    header('Location: index.php', true, 303);
     exit;
 }
-
-if($message === ''){
-    $message = 'Use the buttons to add or delete fans'
+ 
+if ($message === '') {
+    $message = 'Use the buttons to add or delete fans.';
 }
 
 ?>
