@@ -156,6 +156,8 @@ function deleteOldestFan(mysqli $db): bool
 {
     // TODO: Delete the row with the lowest remaining ID using one DELETE query.
     // Return true if one row was deleted, or false if the table was empty.
+    $db->query('DELETE FROM fan_base ORDER BY id ASC LIMIT 1');
+    return $db->affected_rows ===1;
 }
 
 /**

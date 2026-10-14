@@ -9,7 +9,7 @@ $albumApiUrl = 'https://csci331vm.cs.montana.edu/~h48c334/api/random_album.php';
 
 // Start with an empty list so the table can render before database work is added.
 $fans = [];
-$message = 'Starter: database access and API requests are not implemented yet.';
+$message = '';
 
 // PHP runs this file again for every request. Opening the page normally sends
 // GET; clicking a submit button sends POST to this same page. PHP runs on the
@@ -46,6 +46,50 @@ $message = 'Starter: database access and API requests are not implemented yet.';
 //
 // 5. On GET, use readFans($db) to fill $fans. The foreach loop below displays
 //    one table row per fan. A GET only reads data; it must not add or delete fans.
+
+if(isset($_SESSION['message'])){
+    $message = (string) $_SESSION(['message']);
+    unset($_SERVER['message']);
+}
+
+$isPost = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
+
+try{
+    $db = openDatabase();
+
+    if($isPost){
+        $action = $_POST['action'] ?? '';
+
+        if($action === 'add')
+            $users = requestJson($userApiUrl);
+            $albumReponse = requestJson($albumApiUrl);
+            $fan = fanFromResponses($users, $albumReponse);
+            insertFan($db, $fan);
+            $message = 'Added Fan: ' . $fan['first_name'] . ' ' . $fan['last_name'] . '.';
+    } elseif ($action === 'delete'){
+        $message = deleteOldestFan($db);
+        ? 'Deleted the oldest fan.'
+        : 'There are no fans to delete.';
+    }else{
+        $message = 'Unknown action. No changes were made.'
+    }
+}catch (FanApiException $error) {
+    $message = $error->getMessage();
+} catch (Throwable $error) {
+    error_log($error->getMessage());
+    $message = 'A database or setup problem occurred. Check your configuration and try again.';
+}
+
+if($isPost){
+    $_SESSION['message'] = $message;
+    header('Location: index.php', true, 303)
+    exit;
+}
+
+if($message === ''){
+    $message = 'Use the buttons to add or delete fans'
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
