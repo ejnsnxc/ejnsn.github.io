@@ -38,7 +38,7 @@ function escapeHtml($value): string
  */
 function openDatabase(): mysqli
 {
-    $config = require dirname(__DIR__, 3) . '/private/fan-db-config.php';
+    $config = require __DIR__ . '/config.example.php';
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $db = new mysqli($config['host'], $config['user'], $config['password'],
         $config['database'], $config['port'] ?? 3306);

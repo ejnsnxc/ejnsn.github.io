@@ -6,8 +6,8 @@
 // Edit the private copy with your database settings; keep credentials out of Git.
 return [
     'host' => 'localhost',
-    'user' => 'YOUR_DATABASE_USERNAME',
-    'password' => 'YOUR_DATABASE_PASSWORD',
-    'database' => 'YOUR_DATABASE_NAME',
+    'user' => 'user09',
+    'password' => '09carl',
+    'database' => 'db09',
     'port' => 3306,
 ];
