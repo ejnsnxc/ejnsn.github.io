@@ -127,6 +127,12 @@ if ($message === '') {
             <?php foreach ($fans as $fan): ?>
                 <!-- TODO: Add one tr containing three td cells. Show $fan's
                      first_name, age, and album values using escapeHtml(). -->
+                <tr>
+                    <td><?= escapeHtml($fan['first_name']) ?></td>
+                    <td><?= escapeHtml($fan['age']) ?></td>
+                    <td><?= escapeHtml($fan['album']) ?></td>
+                </tr>
+
             <?php endforeach; ?>
         </tbody>
     </table>
