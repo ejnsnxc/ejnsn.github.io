@@ -8,9 +8,9 @@ button:focus-visible, input:focus-visible { outline: 3px solid #185c9d; outline-
 
 /* ---- Interactive rows ---- */
 tbody tr { cursor: pointer; transition: background 0.15s; }
-tbody tr:hover { background: #fff1d6; }
+tbody tr:hover { background: cyan; }
 tbody tr:focus-visible { outline: 3px solid #185c9d; outline-offset: -3px; }
-tbody tr.selected { background: #ffd98a; font-weight: bold; }
+tbody tr.selected { background: darkblue; font-weight: bold; }
 
 /* ---- Fan Heart Album pictograph ---- */
 #fan-detail { margin-top: 1.5rem; }
