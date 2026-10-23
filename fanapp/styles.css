@@ -6,13 +6,13 @@ button { padding: 0.5rem 1rem; cursor: pointer; }
 .error { color: #9b1515; }
 button:focus-visible, input:focus-visible { outline: 3px solid #185c9d; outline-offset: 3px; }
 
-/* ---- Interactive rows ---- */
+/* Interactive rows */
 tbody tr { cursor: pointer; transition: background 0.15s; }
 tbody tr:hover { background: cyan; }
 tbody tr:focus-visible { outline: 3px solid #185c9d; outline-offset: -3px; }
 tbody tr.selected { background: pink; font-weight: bold; }
 
-/* ---- Fan Heart Album pictograph ---- */
+/* Fan Heart Album pictograph */
 #fan-detail { margin-top: 1.5rem; }
 .hint { color: #666; }
 .pictograph { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin: 1rem 0; }

@@ -1,9 +1,7 @@
-// Show a "Fan loves Album" pictograph when a table row is clicked.
+
 const detail = document.getElementById('fan-detail');
 const rows = document.querySelectorAll('tbody tr[data-name]');
 
-// Small helper: create an element, optionally with a class and text.
-// textContent (not innerHTML) keeps API data from being treated as HTML.
 function el(tag, className, text) {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -14,7 +12,6 @@ function el(tag, className, text) {
 function showFan(row) {
     const d = row.dataset;
 
-    // Highlight only the selected row.
     rows.forEach((r) => r.classList.toggle('selected', r === row));
 
     const photo = el('img', 'fan-photo');
@@ -41,7 +38,6 @@ function showFan(row) {
 
 rows.forEach((row) => {
     row.addEventListener('click', () => showFan(row));
-    // Keyboard support: Enter or Space selects the focused row.
     row.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
