@@ -5,3 +5,31 @@ th { background: #eee; }
 button { padding: 0.5rem 1rem; cursor: pointer; }
 .error { color: #9b1515; }
 button:focus-visible, input:focus-visible { outline: 3px solid #185c9d; outline-offset: 3px; }
+
+/* ---- Interactive rows ---- */
+tbody tr { cursor: pointer; transition: background 0.15s; }
+tbody tr:hover { background: #fff1d6; }
+tbody tr:focus-visible { outline: 3px solid #185c9d; outline-offset: -3px; }
+tbody tr.selected { background: #ffd98a; font-weight: bold; }
+
+/* ---- Fan Heart Album pictograph ---- */
+#fan-detail { margin-top: 1.5rem; }
+.hint { color: #666; }
+.pictograph { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin: 1rem 0; }
+.fan-photo {
+    width: 128px; height: 128px; object-fit: cover; border-radius: 50%;
+    border: 5px solid #c2185b; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.heart { font-size: 4rem; line-height: 1; animation: beat 1.2s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+.album-cover {
+    width: 180px; height: 180px; box-sizing: border-box; padding: 1rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: linear-gradient(135deg, #1b3a6b, #7b2d8e); color: #fff;
+    border-radius: 4px; box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+}
+.album-title { font-size: 1.2rem; overflow-wrap: anywhere; }
+.album-artist { font-style: italic; }
+.album-year { font-size: 0.85rem; opacity: 0.8; }
+.age-message { font-size: 1.1rem; }
+@media (prefers-reduced-motion: reduce) { .heart { animation: none; } }

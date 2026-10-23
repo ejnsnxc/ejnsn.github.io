@@ -125,16 +125,26 @@ if ($message === '') {
             <!-- foreach visits each saved record in $fans, calling it $fan.
                  The colon/endforeach syntax lets HTML sit inside the PHP loop. -->
             <?php foreach ($fans as $fan): ?>
-                <!-- TODO: Add one tr containing three td cells. Show $fan's
-                     first_name, age, and album values using escapeHtml(). -->
-                <tr>
+                <tr tabindex="0"
+                    data-name="<?= escapeHtml($fan['first_name'] . ' ' . $fan['last_name']) ?>"
+                    data-picture="<?= escapeHtml($fan['picture']) ?>"
+                    data-album="<?= escapeHtml($fan['album']) ?>"
+                    data-artist="<?= escapeHtml($fan['artist']) ?>"
+                    data-year="<?= escapeHtml($fan['year']) ?>"
+                    data-message="<?= escapeHtml(fanAlbumMessage($fan)) ?>">
                     <td><?= escapeHtml($fan['first_name']) ?></td>
                     <td><?= escapeHtml($fan['age']) ?></td>
                     <td><?= escapeHtml($fan['album']) ?></td>
                 </tr>
-
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <!-- JavaScript fills this section when a table row is clicked. -->
+    <section id="fan-detail" aria-live="polite">
+        <p class="hint">Click a fan in the table to see the album they love.</p>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>

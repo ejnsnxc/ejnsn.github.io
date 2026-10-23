@@ -176,3 +176,32 @@ function readFans(mysqli $db): array
     $result = $db->query('SELECT * FROM fan_base ORDER BY id');
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+/**
+ * Purpose: Describe how the fan's age relates to the album's release year.
+ * How: The fan's birth year is estimated as this year minus their age, so the
+ * result can be off by one year. Subtract it from the album's release year.
+ * A positive difference is the fan's age at release; a negative one means the
+ * album was already that many years old when the fan was born.
+ *
+ * @param array $fan A fan row with first_name, age, album, and year values.
+ * @param int|null $currentYear Year to calculate from; defaults to today's year.
+ * @return string A sentence ready to display (escape it with escapeHtml()).
+ */
+function fanAlbumMessage(array $fan, ?int $currentYear = null): string
+{
+    $currentYear = $currentYear ?? (int) date('Y');
+    $birthYear = $currentYear - (int) $fan['age'];
+    $difference = (int) $fan['year'] - $birthYear;
+    $name = $fan['first_name'];
+    $album = '"' . $fan['album'] . '"';
+    $years = static fn(int $n): string => $n . ($n === 1 ? ' year' : ' years');
+
+    if ($difference > 0) {
+        return "$name was about " . $years($difference) . " old when $album was released.";
+    }
+    if ($difference === 0) {
+        return "$name was born around the same year $album was released.";
+    }
+    return "$album was about " . $years(-$difference) . " old when $name was born.";
+}
