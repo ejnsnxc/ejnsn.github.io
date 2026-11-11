@@ -1,6 +1,1 @@
-# NextJS Homework
-Counters, a project paragraph, and a fakestoreapi.com search table.
-
-    npm install
-    npm run build
-    npx next start -p 30XX
+http://153.90.6.209:3009/
